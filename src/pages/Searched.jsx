@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 function Searched() {
   const [searchedRecipe, setSearchedRecipe] = useState([]);
@@ -25,8 +26,10 @@ function Searched() {
       {searchedRecipe.map((recipe) => {
         return (
           <Card key={recipe.id}>
-            <img src={recipe.image} alt={recipe.title} />
-            <h4>{recipe.title}</h4>
+            <Link to={`/recipe/${recipe.id}`}>
+              <img src={recipe.image} alt={recipe.title} />
+              <h4>{recipe.title}</h4>
+            </Link>
           </Card>
         );
       })}
