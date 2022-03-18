@@ -1,13 +1,28 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function Search() {
+  const [input, setInput] = useState("");
+  const navigate = useNavigate();
+  const submitHandler = (event) => {
+    event.preventDefault();
+    navigate("/searched/" + input);
+  };
   return (
-    <FormStyle>
+    <FormStyle onSubmit={submitHandler}>
       <div>
-        <FaSearch></FaSearch>
-        <input type="text" />
+        <button>
+          <FaSearch></FaSearch>
+        </button>
+        <input
+          type="text"
+          value={input}
+          onInput={(event) => {
+            setInput(event.target.value);
+          }}
+        />
       </div>
     </FormStyle>
   );
@@ -19,6 +34,8 @@ const FormStyle = styled.form`
   div {
     position: relative;
     width: 100%;
+    overflow: hidden;
+    border-radius: 1.5rem;
   }
 
   input {
@@ -32,12 +49,25 @@ const FormStyle = styled.form`
     width: 100%;
   }
 
-  svg {
+  button {
     position: absolute;
+    cursor: pointer;
     top: 50%;
     left: 0%;
-    transform: translate(100%, -50%);
+    transform: translate(0, -50%);
+    background: transparent;
+    border: none;
+    height: 100%;
+    width: 42px;
+
+  }
+  svg {
+    position: absolute;
+    left: 60%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     color: #fff;
+    font-size: 1.2rem;
   }
 `;
 
